@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -60,13 +61,15 @@ public class ClientesController {
 	public ResponseEntity<Object> registrar(@RequestBody Cliente cliente) {
 		try (Connection connection = dataSource.getConnection()) {
 		      Statement stmt = connection.createStatement();
+		      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+		      String strDate= formatter.format(cliente.getFechaVencimiento());  
 		      System.out.println(cliente.getFechaVencimiento());
 		      stmt.executeUpdate("INSERT INTO clientes(apellido, nombre,cedula, tarjeta,fechaVencimiento) "
 		      		+ "VALUES('"+cliente.getApellido()+"', "
 		      				+ "'"+cliente.getNombre()+""
 		      				+ "',"+cliente.getCedula()+", "
 		      				+ ""+cliente.getTarjeta()+", "
-		      				+ "TO_DATE('"+cliente.getFechaVencimiento()+"', 'YYYY-MM-DD'));");
+		      				+ "TO_DATE('"+strDate+"', 'DD/MM/YYYY'));");
 		      URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                       .path("/{id}")
                       .buildAndExpand(cliente.getId())
