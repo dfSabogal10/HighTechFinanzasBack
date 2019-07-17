@@ -3,18 +3,28 @@ package com.example;
 import java.util.Date;
 
 public class Cliente {
+	private int id;
 	private String apellido;
 	private String nombre;
 	private int cedula;
 	private long tarjeta;
 	private Date fechaVencimiento;
 	
-	public Cliente(String pApellido, String pNombre, int pCedula,long pTarjeta,Date pFechaVencimiento){
+	public Cliente(int pId,String pApellido, String pNombre, int pCedula,long pTarjeta,Date pFechaVencimiento){
+		this.id=pId;
 		apellido=pApellido;
 		nombre=pNombre;
 		cedula=pCedula;
 		tarjeta=pTarjeta;
 		fechaVencimiento=pFechaVencimiento;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getApellido() {
