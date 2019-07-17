@@ -73,6 +73,7 @@ public class ClientesController {
 		     
 		      return ResponseEntity.created(location).build();
 		    } catch (Exception e) {
+		    	e.printStackTrace();
 		      return null;
 		    }
     }
