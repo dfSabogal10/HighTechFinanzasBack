@@ -108,9 +108,7 @@ public class ClientesController {
 		try (Connection connection = dataSource.getConnection()) {
 		      Statement stmt = connection.createStatement();
 		      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		      System.out.println(cliente.getNombre());
 		      String strDate= formatter.format(cliente.getFechaVencimiento());  
-		      System.out.println(cliente.getFechaVencimiento());
 		      stmt.executeUpdate("UPDATE clientes "
 		      		+ "SET apellido= '"+cliente.getApellido()+"', "
 		      				+ "nombre= '"+cliente.getNombre()+""
