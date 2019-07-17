@@ -60,12 +60,13 @@ public class ClientesController {
 	public ResponseEntity<Object> registrar(@RequestBody Cliente cliente) {
 		try (Connection connection = dataSource.getConnection()) {
 		      Statement stmt = connection.createStatement();
+		      System.out.println(cliente.getFechaVencimiento());
 		      stmt.executeUpdate("INSERT INTO clientes(apellido, nombre,cedula, tarjeta,fechaVencimiento) "
 		      		+ "VALUES('"+cliente.getApellido()+"', "
 		      				+ "'"+cliente.getNombre()+""
 		      				+ "',"+cliente.getCedula()+", "
 		      				+ ""+cliente.getTarjeta()+", "
-		      				+ "TO_DATE('"+cliente.getFechaVencimiento()+"', 'DD/MM/YYYY'));");
+		      				+ "TO_DATE('"+cliente.getFechaVencimiento()+"', 'YYYY-MM-DD'));");
 		      URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                       .path("/{id}")
                       .buildAndExpand(cliente.getId())
