@@ -107,7 +107,8 @@ public class ClientesController {
 	public ResponseEntity<Object> actualizar(@RequestParam(value="id") int id, @RequestBody Cliente cliente) {
 		try (Connection connection = dataSource.getConnection()) {
 		      Statement stmt = connection.createStatement();
-		      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+		      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		      System.out.println(cliente);
 		      String strDate= formatter.format(cliente.getFechaVencimiento());  
 		      System.out.println(cliente.getFechaVencimiento());
 		      stmt.executeUpdate("UPDATE clientes "
