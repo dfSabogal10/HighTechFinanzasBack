@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class ClientesController {
 	  @Autowired
 	  private DataSource dataSource;
 	  
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/clientes", method=RequestMethod.GET)
 	public ArrayList<Cliente> clientes() {
 		try (Connection connection = dataSource.getConnection()) {
@@ -50,6 +52,7 @@ public class ClientesController {
 		    }
     }
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/cliente", method=RequestMethod.GET)
 	public Cliente cliente(@RequestParam(value="id") int id) {
 		try (Connection connection = dataSource.getConnection()) {
@@ -73,6 +76,7 @@ public class ClientesController {
 		    }
     }
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping(path= "/registrar", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> registrar(@RequestBody Cliente cliente) {
 		try (Connection connection = dataSource.getConnection()) {
@@ -98,6 +102,7 @@ public class ClientesController {
 		    }
     }
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping(path= "/actualizar", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> actualizar(@RequestParam(value="id") int id, @RequestBody Cliente cliente) {
 		try (Connection connection = dataSource.getConnection()) {
