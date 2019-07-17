@@ -82,5 +82,31 @@ public class ClientesController {
 		    }
     }
 	
+	@PostMapping(path= "/actualizar", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Object> actualizar(@RequestParam(value="id") int id, @RequestBody Cliente cliente) {
+		try (Connection connection = dataSource.getConnection()) {
+		      Statement stmt = connection.createStatement();
+		      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+		      String strDate= formatter.format(cliente.getFechaVencimiento());  
+		      System.out.println(cliente.getFechaVencimiento());
+		      stmt.executeUpdate("UPDATE clientes "
+		      		+ "SET apellido= '"+cliente.getApellido()+"', "
+		      				+ "nombre= '"+cliente.getNombre()+""
+		      				+ "', cedula= "+cliente.getCedula()+", "
+		      				+ "tarjeta= "+cliente.getTarjeta()+", "
+		      				+ "fechaVencimiento= TO_DATE('"+strDate+"', 'DD/MM/YYYY') "
+		      						+ "WHERE id="+id+";");
+		      URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                      .path("/{id}")
+                      .buildAndExpand(cliente.getId())
+                      .toUri();
+		     
+		      return ResponseEntity.created(location).build();
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		      return null;
+		    }
+    }
+	
 
 }
