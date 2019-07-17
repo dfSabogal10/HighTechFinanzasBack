@@ -56,7 +56,7 @@ public class ClientesController {
 		    }
     }
 	
-	@PostMapping(path= "/", consumes = "application/json", produces = "application/json")
+	@PostMapping(path= "/registrar", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> registrar(@RequestBody Cliente cliente) {
 		try (Connection connection = dataSource.getConnection()) {
 		      Statement stmt = connection.createStatement();
